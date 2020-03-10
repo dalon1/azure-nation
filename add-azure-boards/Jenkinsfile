@@ -1,10 +1,10 @@
 node {
-    env.AZURE_REQUEST = """{ \ 
+    env.AZURE_REQUEST = """'{ \ 
     "op": "add", \
     "path": "/fields/System.Title", \
     "from": null, \
     "value": "Sample task" \
-    }"""
+    }'"""
     withCredentials([usernamePassword(credentialsId: 'azure-boards', usernameVariable: 'USERNAME', passwordVariable: 'AZURE_TOKEN')]) {
         sh label: 'Qry boards', script: """
         curl -v -X POST \
