@@ -1,1 +1,10 @@
+node {
+    withCredentials([usernamePassword(credentialsId: 'azure-boards', usernameVariable: 'USERNAME', passwordVariable: 'AZURE_TOKEN')]) {
+        sh label: 'Qry boards', script: """
+        curl -X GET \
+        -u $USERNAME -p $AZURE_TOKEN \
+        https://dev.azure.com/alondannel/My%20DevOps%20Project/_apis/wit/workitems/2?api-version=5.1
+        """
+    }
+}
 
