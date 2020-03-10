@@ -1,10 +1,17 @@
 node {
+    env.AZURE_REQUEST = """{ \ 
+    "op": "add", \
+    "path": "/fields/System.Title", \
+    "from": null, \
+    "value": "Sample task" \
+    }"""
     withCredentials([usernamePassword(credentialsId: 'azure-boards', usernameVariable: 'USERNAME', passwordVariable: 'AZURE_TOKEN')]) {
         sh label: 'Qry boards', script: """
         curl -v -X POST \
         -u $USERNAME:$AZURE_TOKEN \
         -H 'Content-Type: application/json-patch+json' \
-        https://dev.azure.com/alondannel/My%20DevOps%20Project/_apis/wit/workitems/issue?api-version=5.1
+        https://dev.azure.com/alondannel/My%20DevOps%20Project/_apis/wit/workitems/issue?api-version=5.1 \
+        -d $AZURE_REQUEST
         """
     }
 }
