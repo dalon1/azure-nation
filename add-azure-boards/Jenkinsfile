@@ -6,7 +6,7 @@ node {
         -u $USERNAME:$AZURE_TOKEN \
         -H 'Content-Type: application/json' \
         https://dev.azure.com/alondannel/My%20DevOps%20Project/_apis/wit/workitems/issue?api-version=5.1 \
-        -d $AZURE_REQUEST
+        -d \"$AZURE_REQUEST\"
         """
     }
 }
